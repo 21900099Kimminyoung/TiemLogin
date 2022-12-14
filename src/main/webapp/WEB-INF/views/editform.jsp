@@ -14,10 +14,12 @@
 <form:form modelAttribute="boardVO" method="POST" action="../editok">
     <form:hidden path="seq"/>
     <table id="edit">
+        <tr><td>semester:</td><td><form:input path="semester"/></td></tr>
         <tr><td>category:</td><td><form:input path="category"/></td></tr>
-        <tr><td>Title:</td><td><form:input path="title"/></td></tr>
-        <tr><td>Writer:</td><td><form path="writer"/></td></tr>
-        <tr><td>Content:</td><td><form:textarea cols="50" rows="5" path="content"/></td></tr>
+        <tr><td>classs:</td><td><form:input path="classs"/></td></tr>
+        <tr><td>professor:</td><td><form:input path="professor"/></td></tr>
+        <tr><td>classCapacity:</td><td><form:input path="classCapacity"/></td></tr>
+        <tr><td>email:</td><td><form:input path="email"/></td></tr>
     </table>
     <input type="submit" value="수정하기" />
     <input type="button" value="Cancel" onclick="history.back()"/></td></tr>

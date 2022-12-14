@@ -35,14 +35,16 @@
     </script>
 </head>
 <body>
-<h1>자유게시판</h1>
+<h1>강의평 게시판</h1>
 <table id="list" width="90%">
 <tr>
     <th>Id</th>
+    <th>Semester</th>
     <th>Category</th>
-    <th>Title</th>
-    <th>Writer</th>
-    <th>Content</th>
+    <th>Classs</th>
+    <th>Professor</th>
+    <th>ClassCapacity</th>
+    <th>Email</th>
     <th>Regdate</th>
     <th>Edit</th>
     <th>Delete</th>
@@ -51,10 +53,12 @@
  <c:forEach items = "${list}" var="u">
      <tr>
          <td>${u.seq}</td>
+         <td>${u.semester}</td>
          <td>${u.category}</td>
-         <td>${u.title}</td>
-         <td>${u.writer}</td>
-         <td>${u.content}</td>
+         <td>${u.classs}</td>
+         <td>${u.professor}</td>
+         <td>${u.classCapacity}</td>
+         <td>${u.email}</td>
          <td>${u.regdate}</td>
          <td><a href="editform/${u.seq}">Edit</a></td>
          <td><a href="javascript:delete_ok('${u.seq}')">Delete</a></td>
@@ -62,5 +66,6 @@
  </c:forEach>
 </table>
 <br/><button type="button" onclick="location.href='add'"> Add New Post </button>
+<button type="button" onclick="location.href='../login/login'"> 로그아웃 </button>
 </body>
 </html>

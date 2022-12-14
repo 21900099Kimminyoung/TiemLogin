@@ -1,4 +1,4 @@
-package user;
+package com.example.user;
 
 public class UserVO {
     private String userid;

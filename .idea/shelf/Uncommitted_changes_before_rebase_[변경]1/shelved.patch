@@ -1,0 +1,1035 @@
+Index: src/main/java/com/example/util/LoginCheckInterceptor.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package util;\r\n\r\nimport org.springframework.web.servlet.HandlerInterceptor;\r\nimport org.springframework.web.servlet.ModelAndView;\r\n\r\nimport javax.servlet.http.HttpServletRequest;\r\nimport javax.servlet.http.HttpServletResponse;\r\nimport javax.servlet.http.HttpSession;\r\n\r\npublic class LoginCheckInterceptor implements HandlerInterceptor {\r\n    @Override\r\n    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception{\r\n        HttpSession session = request.getSession();\r\n        Object obj = session.getAttribute(\"login\");\r\n        if(obj==null){\r\n            response.sendRedirect(request.getContextPath()+\"/login/login\");\r\n            return false;\r\n        }\r\n        return true;\r\n    }\r\n\r\n    @Override\r\n    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {\r\n        HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/util/LoginCheckInterceptor.java b/src/main/java/com/example/util/LoginCheckInterceptor.java
+--- a/src/main/java/com/example/util/LoginCheckInterceptor.java	(revision 27fe1c02007f67b0f10741d305e3de063ddc2067)
++++ b/src/main/java/com/example/util/LoginCheckInterceptor.java	(date 1671005146548)
+@@ -1,4 +1,4 @@
+-package util;
++package com.example.util;
+ 
+ import org.springframework.web.servlet.HandlerInterceptor;
+ import org.springframework.web.servlet.ModelAndView;
+Index: src/main/java/com/example/user/UserVO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package user;\r\n\r\npublic class UserVO {\r\n    private String userid;\r\n    private String password;\r\n    private String username;\r\n\r\n    public void setUserid(String userid){\r\n        this.userid = userid;\r\n    }\r\n    public String getPassword(){\r\n        return password;\r\n    }\r\n    public void setPassword(String password){\r\n        this.password = password;\r\n    }\r\n    public String getUsername() {\r\n        return username;\r\n    }\r\n\r\n    public void setUsername(String username) {\r\n        this.username = username;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/user/UserVO.java b/src/main/java/com/example/user/UserVO.java
+--- a/src/main/java/com/example/user/UserVO.java	(revision 27fe1c02007f67b0f10741d305e3de063ddc2067)
++++ b/src/main/java/com/example/user/UserVO.java	(date 1671005146557)
+@@ -1,4 +1,4 @@
+-package user;
++package com.example.user;
+ 
+ public class UserVO {
+     private String userid;
+Index: src/main/webapp/WEB-INF/views/addpostform.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><%@ page language=\"java\" contentType=\"text/html; charset=UTF-8\"\r\n         pageEncoding=\"UTF-8\"%>\r\n<!DOCTYPE html>\r\n<html>\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <title>Insert title here</title>\r\n</head>\r\n<body>\r\n\r\n<h1>Add New Post</h1>\r\n<form action=\"addok\" method=\"post\">\r\n    <table id=\"edit\">\r\n        <tr><td>category:</td><td><input type=\"text\" name=\"category\"/></td></tr>\r\n        <tr><td>Title:</td><td><input type=\"text\" name=\"title\"/></td></tr>\r\n        <tr><td>Writer:</td><td><input type=\"text\" name=\"writer\"/></td></tr>\r\n        <tr><td>Content:</td><td><textarea cols=\"50\" rows=\"5\" name=\"content\"></textarea></td></tr>\r\n    </table>\r\n    <button type=\"button\" onclick=\"location.href='list'\">목록보기</button>\r\n    <button type=\"submit\">등록하기</button>\r\n</form>\r\n\r\n</body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/webapp/WEB-INF/views/addpostform.jsp b/src/main/webapp/WEB-INF/views/addpostform.jsp
+--- a/src/main/webapp/WEB-INF/views/addpostform.jsp	(revision 27fe1c02007f67b0f10741d305e3de063ddc2067)
++++ b/src/main/webapp/WEB-INF/views/addpostform.jsp	(date 1671005146568)
+@@ -11,10 +11,12 @@
+ <h1>Add New Post</h1>
+ <form action="addok" method="post">
+     <table id="edit">
++        <tr><td>semester:</td><td><input type="text" name="semester"/></td></tr>
+         <tr><td>category:</td><td><input type="text" name="category"/></td></tr>
+-        <tr><td>Title:</td><td><input type="text" name="title"/></td></tr>
+-        <tr><td>Writer:</td><td><input type="text" name="writer"/></td></tr>
+-        <tr><td>Content:</td><td><textarea cols="50" rows="5" name="content"></textarea></td></tr>
++        <tr><td>classs:</td><td><input type="text" name="classs"/></td></tr>
++        <tr><td>professor:</td><td><input type="text" name="professor"/></td></tr>
++        <tr><td>classCapacity:</td><td><input type="text" name="classCapacity"/></td></tr>
++        <tr><td>email:</td><td><input type="text" name="email"/></td></tr>
+     </table>
+     <button type="button" onclick="location.href='list'">목록보기</button>
+     <button type="submit">등록하기</button>
+Index: src/main/webapp/WEB-INF/views/editform.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><%@ taglib prefix=\"form\" uri=\"http://www.springframework.org/tags/form\" %>\r\n<%@ page language=\"java\" contentType=\"text/html; charset=UTF-8\"\r\n         pageEncoding=\"UTF-8\" isELIgnored=\"false\"%>\r\n\r\n<!DOCTYPE html>\r\n<html>\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <title>Edit Form</title>\r\n</head>\r\n<body>\r\n<h1>Edit Form</h1>\r\n<%--@elvariable id=\"boardVO\" type=\"\"--%>\r\n<form:form modelAttribute=\"boardVO\" method=\"POST\" action=\"../editok\">\r\n    <form:hidden path=\"seq\"/>\r\n    <table id=\"edit\">\r\n        <tr><td>category:</td><td><form:input path=\"category\"/></td></tr>\r\n        <tr><td>Title:</td><td><form:input path=\"title\"/></td></tr>\r\n        <tr><td>Writer:</td><td><form path=\"writer\"/></td></tr>\r\n        <tr><td>Content:</td><td><form:textarea cols=\"50\" rows=\"5\" path=\"content\"/></td></tr>\r\n    </table>\r\n    <input type=\"submit\" value=\"수정하기\" />\r\n    <input type=\"button\" value=\"Cancel\" onclick=\"history.back()\"/></td></tr>\r\n</form:form>\r\n</body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/webapp/WEB-INF/views/editform.jsp b/src/main/webapp/WEB-INF/views/editform.jsp
+--- a/src/main/webapp/WEB-INF/views/editform.jsp	(revision 27fe1c02007f67b0f10741d305e3de063ddc2067)
++++ b/src/main/webapp/WEB-INF/views/editform.jsp	(date 1671005146578)
+@@ -14,10 +14,12 @@
+ <form:form modelAttribute="boardVO" method="POST" action="../editok">
+     <form:hidden path="seq"/>
+     <table id="edit">
++        <tr><td>semester:</td><td><form:input path="semester"/></td></tr>
+         <tr><td>category:</td><td><form:input path="category"/></td></tr>
+-        <tr><td>Title:</td><td><form:input path="title"/></td></tr>
+-        <tr><td>Writer:</td><td><form path="writer"/></td></tr>
+-        <tr><td>Content:</td><td><form:textarea cols="50" rows="5" path="content"/></td></tr>
++        <tr><td>classs:</td><td><form:input path="classs"/></td></tr>
++        <tr><td>professor:</td><td><form:input path="professor"/></td></tr>
++        <tr><td>classCapacity:</td><td><form:input path="classCapacity"/></td></tr>
++        <tr><td>email:</td><td><form:input path="email"/></td></tr>
+     </table>
+     <input type="submit" value="수정하기" />
+     <input type="button" value="Cancel" onclick="history.back()"/></td></tr>
+Index: src/main/webapp/WEB-INF/views/list.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><%@ taglib prefix=\"c\" uri=\"http://java.sun.com/jsp/jstl/core\" %>\r\n\r\n\r\n<%@ page contentType=\"text/html;charset=UTF-8\" language=\"java\" isELIgnored=\"false\" %>\r\n<html>\r\n<head>\r\n    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=ISO-8859-1\">\r\n    <title>free board</title>\r\n    <style>\r\n        #list {\r\n            font-family: \"Trebuchet MS\", Arial, Helvetica, sans-serif;\r\n            border-collapse: collapse;\r\n            width: 100%;\r\n        }\r\n        #list td, #list th {\r\n            border: 1px solid #ddd;\r\n            padding: 8px;\r\n            text-align:center;\r\n        }\r\n        #list tr:nth-child(even){background-color: #f2f2f2;}\r\n        #list tr:hover {background-color: #ddd;}\r\n        #list th {\r\n            padding-top: 12px;\r\n            padding-bottom: 12px;\r\n            text-align: center;\r\n            background-color: #006bb3;\r\n            color: white;\r\n        }\r\n    </style>\r\n    <script>\r\n        function delete_ok(id){\r\n            var a = confirm(\"정말로 삭제하겠습니까?\");\r\n            if(a) location.href='deleteok/' + id;\r\n        }\r\n    </script>\r\n</head>\r\n<body>\r\n<h1>자유게시판</h1>\r\n<table id=\"list\" width=\"90%\">\r\n<tr>\r\n    <th>Id</th>\r\n    <th>Category</th>\r\n    <th>Title</th>\r\n    <th>Writer</th>\r\n    <th>Content</th>\r\n    <th>Regdate</th>\r\n    <th>Edit</th>\r\n    <th>Delete</th>\r\n</tr>\r\n\r\n <c:forEach items = \"${list}\" var=\"u\">\r\n     <tr>\r\n         <td>${u.seq}</td>\r\n         <td>${u.category}</td>\r\n         <td>${u.title}</td>\r\n         <td>${u.writer}</td>\r\n         <td>${u.content}</td>\r\n         <td>${u.regdate}</td>\r\n         <td><a href=\"editform/${u.seq}\">Edit</a></td>\r\n         <td><a href=\"javascript:delete_ok('${u.seq}')\">Delete</a></td>\r\n     </tr>\r\n </c:forEach>\r\n</table>\r\n<br/><button type=\"button\" onclick=\"location.href='add'\"> Add New Post </button>\r\n</body>\r\n</html>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/webapp/WEB-INF/views/list.jsp b/src/main/webapp/WEB-INF/views/list.jsp
+--- a/src/main/webapp/WEB-INF/views/list.jsp	(revision 27fe1c02007f67b0f10741d305e3de063ddc2067)
++++ b/src/main/webapp/WEB-INF/views/list.jsp	(date 1671005146589)
+@@ -35,14 +35,16 @@
+     </script>
+ </head>
+ <body>
+-<h1>자유게시판</h1>
++<h1>강의평 게시판</h1>
+ <table id="list" width="90%">
+ <tr>
+     <th>Id</th>
++    <th>Semester</th>
+     <th>Category</th>
+-    <th>Title</th>
+-    <th>Writer</th>
+-    <th>Content</th>
++    <th>Classs</th>
++    <th>Professor</th>
++    <th>ClassCapacity</th>
++    <th>Email</th>
+     <th>Regdate</th>
+     <th>Edit</th>
+     <th>Delete</th>
+@@ -51,10 +53,12 @@
+  <c:forEach items = "${list}" var="u">
+      <tr>
+          <td>${u.seq}</td>
++         <td>${u.semester}</td>
+          <td>${u.category}</td>
+-         <td>${u.title}</td>
+-         <td>${u.writer}</td>
+-         <td>${u.content}</td>
++         <td>${u.classs}</td>
++         <td>${u.professor}</td>
++         <td>${u.classCapacity}</td>
++         <td>${u.email}</td>
+          <td>${u.regdate}</td>
+          <td><a href="editform/${u.seq}">Edit</a></td>
+          <td><a href="javascript:delete_ok('${u.seq}')">Delete</a></td>
+@@ -62,5 +66,6 @@
+  </c:forEach>
+ </table>
+ <br/><button type="button" onclick="location.href='add'"> Add New Post </button>
++<button type="button" onclick="location.href='../login/login'"> 로그아웃 </button>
+ </body>
+ </html>
+Index: src/main/java/com/example/user/LoginController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package user;\r\n\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.stereotype.Controller;\r\nimport org.springframework.web.bind.annotation.RequestMapping;\r\nimport org.springframework.web.bind.annotation.RequestMethod;\r\n\r\nimport javax.servlet.http.HttpSession;\r\n\r\n@Controller\r\n@RequestMapping(value = \"/login\")\r\npublic class LoginController{\r\n\r\n    @Autowired\r\n    UserServiceImpl service;\r\n\r\n    @RequestMapping(value = \"/login\", method= RequestMethod.GET)\r\n    public String login(){\r\n        return \"login\";\r\n    }\r\n\r\n    @RequestMapping(value = \"/loginOk\",method = RequestMethod.POST)\r\n    public String loginCheck(HttpSession session, UserVO vo){\r\n        String returnURL=\"\";\r\n        if(session.getAttribute(\"login\")!=null){\r\n            session.removeAttribute(\"login\");\r\n        }\r\n\r\n        UserVO loginvo = service.getUser(vo);\r\n        if(loginvo !=null){\r\n            System.out.println(\"로그인 성공!\");\r\n            session.setAttribute(\"login\",loginvo);\r\n            returnURL =  \"redirect:/board/list\";\r\n        }else{\r\n            System.out.println(\"로그인 실패!\");\r\n            returnURL =  \"redirect:/login/login\";\r\n        }\r\n        return returnURL;\r\n    }\r\n\r\n    @RequestMapping(value = \"/logout\")\r\n    public String logout(HttpSession session){\r\n        session.invalidate();\r\n        return \"redirect:/login/login\";\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/user/LoginController.java b/src/main/java/com/example/user/LoginController.java
+--- a/src/main/java/com/example/user/LoginController.java	(revision 27fe1c02007f67b0f10741d305e3de063ddc2067)
++++ b/src/main/java/com/example/user/LoginController.java	(date 1671005146645)
+@@ -1,4 +1,4 @@
+-package user;
++package com.example.user;
+ 
+ import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.stereotype.Controller;
+Index: src/main/java/com/example/user/UserServiceImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package user;\r\n\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\n\r\npublic class UserServiceImpl {\r\n    @Autowired\r\n    UserDAO userDAO;\r\n    public UserVO getUser(UserVO vo){\r\n        return userDAO.getUser(vo);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/user/UserServiceImpl.java b/src/main/java/com/example/user/UserServiceImpl.java
+--- a/src/main/java/com/example/user/UserServiceImpl.java	(revision 27fe1c02007f67b0f10741d305e3de063ddc2067)
++++ b/src/main/java/com/example/user/UserServiceImpl.java	(date 1671005146655)
+@@ -1,7 +1,9 @@
+-package user;
++package com.example.user;
+ 
+ import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.stereotype.Service;
+ 
++@Service
+ public class UserServiceImpl {
+     @Autowired
+     UserDAO userDAO;
+Index: src/main/resources/mappers/user-mapper.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<beans xmlns=\"http://www.springframework.org/schema/beans\"\r\n       xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n       xsi:schemaLocation=\"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd\">\r\n\r\n</beans>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/mappers/user-mapper.xml b/src/main/resources/mappers/user-mapper.xml
+--- a/src/main/resources/mappers/user-mapper.xml	(revision 27fe1c02007f67b0f10741d305e3de063ddc2067)
++++ b/src/main/resources/mappers/user-mapper.xml	(date 1671005146665)
+@@ -1,6 +1,8 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+-<beans xmlns="http://www.springframework.org/schema/beans"
+-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+-
+-</beans>
+\ No newline at end of file
++<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
++<mapper namespace="User">
++    <select id="getUser" resultType="com.example.user.UserVO">
++        select userid, username from member
++        where userid= #{userid} and password=#{password}
++    </select>
++</mapper>
+\ No newline at end of file
+Index: src/main/webapp/WEB-INF/views/login.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><%--\r\n  Created by IntelliJ IDEA.\r\n  User: rngusdn\r\n  Date: 2022/12/08\r\n  Time: 7:33 PM\r\n  To change this template use File | Settings | File Templates.\r\n--%>\r\n<%@ page contentType=\"text/html;charset=UTF-8\" language=\"java\" %>\r\n<html>\r\n  <head>\r\n    <title>$Title$</title>\r\n  </head>\r\n  <body>\r\n  $END$\r\n  </body>\r\n</html>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/webapp/WEB-INF/views/login.jsp b/src/main/webapp/WEB-INF/views/login.jsp
+--- a/src/main/webapp/WEB-INF/views/login.jsp	(revision 27fe1c02007f67b0f10741d305e3de063ddc2067)
++++ b/src/main/webapp/WEB-INF/views/login.jsp	(date 1671005146679)
+@@ -7,10 +7,24 @@
+ --%>
+ <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+ <html>
+-  <head>
+-    <title>$Title$</title>
+-  </head>
+-  <body>
+-  $END$
+-  </body>
++<head>
++    <title>Insert title here</title>
++    <style>
++        img, label {display: inline-block;}
++        label{width:130px}
++        button{background-color: blue; color: white; font-size: 15px}
++    </style>
++</head>
++<body>
++<div style='width: 100%; text-align:center; padding-top: 100px;'>
++    <h1>강의평 게시판</h1>
++    <img src="../resources/img/6697.jpg" height="250">
++    <form method="post" action="loginOk">
++        <div><label>User ID: </label><input type="text" name ='userid'/></div>
++        <div><label>Password: </label><input type="password" name ='password'/></div>
++        <button type='submit'>login</button>
++    </form>
++</div>
++
++</body>
+ </html>
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"cf536cac-4baf-404a-b9e9-073f1327ed6e\" name=\"변경\" comment=\"\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ComposerSettings\">\r\n    <execution />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2IcQvhOvHnLCQmaNYtbx3pIt8dR\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"WebServerToolWindowFactoryState\": \"false\"\r\n  }\r\n}]]></component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"애플리케이션 수준\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"디폴트 작업\">\r\n      <changelist id=\"cf536cac-4baf-404a-b9e9-073f1327ed6e\" name=\"변경\" comment=\"\" />\r\n      <created>1670478625518</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1670478625518</updated>\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 27fe1c02007f67b0f10741d305e3de063ddc2067)
++++ b/.idea/workspace.xml	(date 1671005146692)
+@@ -1,7 +1,41 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
++  <component name="ArtifactsWorkspaceSettings">
++    <artifacts-to-build>
++      <artifact name="plzLogin:war exploded" />
++    </artifacts-to-build>
++  </component>
++  <component name="AutoImportSettings">
++    <option name="autoReloadType" value="SELECTIVE" />
++  </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="cf536cac-4baf-404a-b9e9-073f1327ed6e" name="변경" comment="" />
++    <list default="true" id="cf536cac-4baf-404a-b9e9-073f1327ed6e" name="변경" comment="변경">
++      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/board/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/board/BoardController.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/board/BoardDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/board/BoardDAO.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/board/BoardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/board/BoardService.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/board/BoardServicelmpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/board/BoardServicelmpl.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/board/BoardVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/board/BoardVO.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/board/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/board/HomeController.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/user/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/user/LoginController.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/user/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/user/UserDAO.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/user/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/user/UserServiceImpl.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/user/UserVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/user/UserVO.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/util/LoginCheckInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/util/LoginCheckInterceptor.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/board-mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/board-mapper.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/user-mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/user-mapper.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis-config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis-config.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/applicationContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/applicationContext.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/dispatcher-servlet.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/dispatcher-servlet.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/addpostform.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/addpostform.jsp" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/editform.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/editform.jsp" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/list.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/list.jsp" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/login.jsp" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -10,22 +44,177 @@
+   <component name="ComposerSettings">
+     <execution />
+   </component>
++  <component name="FileTemplateManagerImpl">
++    <option name="RECENT_TEMPLATES">
++      <list>
++        <option value="spring-beans.schema" />
++        <option value="Class" />
++        <option value="Jsp File" />
++      </list>
++    </option>
++  </component>
+   <component name="Git.Settings">
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
++  <component name="LogFilters">
++    <option name="FILTER_ERRORS" value="false" />
++    <option name="FILTER_WARNINGS" value="false" />
++    <option name="FILTER_INFO" value="true" />
++    <option name="FILTER_DEBUG" value="true" />
++    <option name="CUSTOM_FILTER" />
++  </component>
++  <component name="MarkdownSettingsMigration">
++    <option name="stateVersion" value="1" />
++  </component>
+   <component name="ProjectId" id="2IcQvhOvHnLCQmaNYtbx3pIt8dR" />
+   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+   <component name="ProjectViewState">
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "RunOnceActivity.OpenProjectViewOnStart": "true",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "WebServerToolWindowFactoryState": "false"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
++    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
++    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
++    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
++    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
++    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
++    &quot;last_opened_file_path&quot;: &quot;C:/Users/alsdu/plzLogin&quot;,
++    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
++    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
++    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
++    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
++    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
++    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
++    &quot;project.structure.side.proportion&quot;: &quot;0.34367815&quot;,
++    &quot;spring.configuration.checksum&quot;: &quot;eb66b96a7e3a7af70fcd3e35bcdfcc83&quot;
++  },
++  &quot;keyToStringList&quot;: {
++    &quot;DatabaseDriversLRU&quot;: [
++      &quot;mariadb&quot;
++    ]
+   }
+-}]]></component>
++}</component>
++  <component name="RecentsManager">
++    <key name="CreateClassDialog.RecentsKey">
++      <recent name="user" />
++    </key>
++    <key name="CopyFile.RECENT_KEYS">
++      <recent name="C:\Users\alsdu\plzLogin\src\main\webapp\resources\img" />
++      <recent name="$PROJECT_DIR$/src/main/webapp/resources/img" />
++      <recent name="$PROJECT_DIR$/src/main/resources/mappers" />
++      <recent name="$PROJECT_DIR$/src/main/resources" />
++      <recent name="$PROJECT_DIR$/src/main/webapp/WEB-INF" />
++    </key>
++    <key name="MoveFile.RECENT_KEYS">
++      <recent name="$PROJECT_DIR$/src/main/resources" />
++      <recent name="$PROJECT_DIR$/src/main/img" />
++    </key>
++    <key name="CopyClassDialog.RECENTS_KEY">
++      <recent name="com.example.util" />
++      <recent name="board" />
++    </key>
++  </component>
++  <component name="RunDashboard">
++    <option name="excludedTypes">
++      <set>
++        <option value="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" />
++      </set>
++    </option>
++  </component>
++  <component name="RunManager">
++    <configuration name="Tomcat 9.0.68" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.68" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
++      <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
++      <option name="UPDATING_POLICY" value="restart-server" />
++      <deployment>
++        <artifact name="plzLogin:war exploded">
++          <settings>
++            <option name="CONTEXT_PATH" value="/plzLogin_war_exploded" />
++          </settings>
++        </artifact>
++      </deployment>
++      <server-settings>
++        <option name="BASE_DIRECTORY_NAME" value="18ae1311-a846-466e-a160-a358cc8efc95" />
++      </server-settings>
++      <predefined_log_file enabled="true" id="Tomcat" />
++      <predefined_log_file enabled="true" id="Tomcat Catalina" />
++      <predefined_log_file id="Tomcat Manager" />
++      <predefined_log_file id="Tomcat Host Manager" />
++      <predefined_log_file id="Tomcat Localhost Access" />
++      <RunnerSettings RunnerId="Debug">
++        <option name="DEBUG_PORT" value="54231" />
++      </RunnerSettings>
++      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
++        <option name="USE_ENV_VARIABLES" value="true" />
++        <STARTUP>
++          <option name="USE_DEFAULT" value="true" />
++          <option name="SCRIPT" value="" />
++          <option name="VM_PARAMETERS" value="" />
++          <option name="PROGRAM_PARAMETERS" value="" />
++        </STARTUP>
++        <SHUTDOWN>
++          <option name="USE_DEFAULT" value="true" />
++          <option name="SCRIPT" value="" />
++          <option name="VM_PARAMETERS" value="" />
++          <option name="PROGRAM_PARAMETERS" value="" />
++        </SHUTDOWN>
++      </ConfigurationWrapper>
++      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
++        <option name="USE_ENV_VARIABLES" value="true" />
++        <STARTUP>
++          <option name="USE_DEFAULT" value="true" />
++          <option name="SCRIPT" value="" />
++          <option name="VM_PARAMETERS" value="" />
++          <option name="PROGRAM_PARAMETERS" value="" />
++        </STARTUP>
++        <SHUTDOWN>
++          <option name="USE_DEFAULT" value="true" />
++          <option name="SCRIPT" value="" />
++          <option name="VM_PARAMETERS" value="" />
++          <option name="PROGRAM_PARAMETERS" value="" />
++        </SHUTDOWN>
++      </ConfigurationWrapper>
++      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Profile">
++        <option name="USE_ENV_VARIABLES" value="true" />
++        <STARTUP>
++          <option name="USE_DEFAULT" value="true" />
++          <option name="SCRIPT" value="" />
++          <option name="VM_PARAMETERS" value="" />
++          <option name="PROGRAM_PARAMETERS" value="" />
++        </STARTUP>
++        <SHUTDOWN>
++          <option name="USE_DEFAULT" value="true" />
++          <option name="SCRIPT" value="" />
++          <option name="VM_PARAMETERS" value="" />
++          <option name="PROGRAM_PARAMETERS" value="" />
++        </SHUTDOWN>
++      </ConfigurationWrapper>
++      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
++        <option name="USE_ENV_VARIABLES" value="true" />
++        <STARTUP>
++          <option name="USE_DEFAULT" value="true" />
++          <option name="SCRIPT" value="" />
++          <option name="VM_PARAMETERS" value="" />
++          <option name="PROGRAM_PARAMETERS" value="" />
++        </STARTUP>
++        <SHUTDOWN>
++          <option name="USE_DEFAULT" value="true" />
++          <option name="SCRIPT" value="" />
++          <option name="VM_PARAMETERS" value="" />
++          <option name="PROGRAM_PARAMETERS" value="" />
++        </SHUTDOWN>
++      </ConfigurationWrapper>
++      <method v="2">
++        <option name="Make" enabled="true" />
++        <option name="BuildArtifacts" enabled="true">
++          <artifact name="plzLogin:war exploded" />
++        </option>
++      </method>
++    </configuration>
++  </component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+     <task active="true" id="Default" summary="디폴트 작업">
+@@ -34,8 +223,19 @@
+       <option name="number" value="Default" />
+       <option name="presentableId" value="Default" />
+       <updated>1670478625518</updated>
++      <workItem from="1670478627272" duration="5009000" />
++      <workItem from="1670492762358" duration="4241000" />
++      <workItem from="1670543513475" duration="2447000" />
++      <workItem from="1670573436074" duration="794000" />
++      <workItem from="1670574243790" duration="3426000" />
++      <workItem from="1670832001176" duration="52000" />
++      <workItem from="1671000682865" duration="3106000" />
++      <workItem from="1671004493594" duration="40000" />
+     </task>
+     <servers />
++  </component>
++  <component name="TypeScriptGeneratedFilesManager">
++    <option name="version" value="3" />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+     <option name="TAB_STATES">
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_1_8\" default=\"true\" project-jdk-name=\"corretto-1.8\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 27fe1c02007f67b0f10741d305e3de063ddc2067)
++++ b/.idea/misc.xml	(date 1671005146703)
+@@ -1,6 +1,16 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ExternalStorageConfigurationManager" enabled="true" />
++  <component name="FrameworkDetectionExcludesConfiguration">
++    <file type="web" url="file://$PROJECT_DIR$" />
++  </component>
++  <component name="MavenProjectsManager">
++    <option name="originalFiles">
++      <list>
++        <option value="$PROJECT_DIR$/pom.xml" />
++      </list>
++    </option>
++  </component>
+   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="corretto-1.8" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>
+Index: .idea/dataSources.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"DataSourceManagerImpl\" format=\"xml\" multifile-model=\"true\">\r\n    <data-source source=\"LOCAL\" name=\"@walab.handong.edu\" uuid=\"4c50f6cd-95fd-44a9-826f-0f1d74791212\">\r\n      <driver-ref>mariadb</driver-ref>\r\n      <synchronize>true</synchronize>\r\n      <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>\r\n      <jdbc-url>jdbc:mariadb://walab.handong.edu:3306</jdbc-url>\r\n      <working-dir>$ProjectFileDir$</working-dir>\r\n    </data-source>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/dataSources.xml b/.idea/dataSources.xml
+--- a/.idea/dataSources.xml	(revision 27fe1c02007f67b0f10741d305e3de063ddc2067)
++++ b/.idea/dataSources.xml	(date 1671005146712)
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+-    <data-source source="LOCAL" name="@walab.handong.edu" uuid="4c50f6cd-95fd-44a9-826f-0f1d74791212">
++    <data-source source="LOCAL" name="@walab.handong.edu" uuid="b2b60cd1-c58f-4878-b053-6933e6595b33">
+       <driver-ref>mariadb</driver-ref>
+       <synchronize>true</synchronize>
+       <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
+Index: src/main/java/com/example/board/BoardVO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package board;\r\n\r\nimport java.util.Date;\r\n\r\npublic class BoardVO {\r\n\tprivate int seq;\r\n\tprivate String category;\r\n\tprivate String title;\r\n\tprivate String writer;\r\n\tprivate String content;\r\n\tprivate Date regdate;\r\n\tprivate int cnt;\r\n\r\n\r\n\tpublic int getSeq() {\r\n\t\treturn seq;\r\n\t}\r\n\tpublic void setSeq(int seq) {\r\n\t\tthis.seq = seq;\r\n\t}\r\n\tpublic String getTitle() {\r\n\t\treturn title;\r\n\t}\r\n\tpublic void setTitle(String title) {\r\n\t\tthis.title = title;\r\n\t}\r\n\tpublic String getWriter() {\r\n\t\treturn writer;\r\n\t}\r\n\tpublic void setWriter(String writer) {\r\n\t\tthis.writer = writer;\r\n\t}\r\n\tpublic String getContent() {\r\n\t\treturn content;\r\n\t}\r\n\tpublic void setContent(String content) {\r\n\t\tthis.content = content;\r\n\t}\r\n\tpublic Date getRegdate() {\r\n\t\treturn regdate;\r\n\t}\r\n\tpublic void setRegdate(Date regdate) {\r\n\t\tthis.regdate = regdate;\r\n\t}\r\n\tpublic int getCnt() {\r\n\t\treturn cnt;\r\n\t}\r\n\tpublic void setCnt(int cnt) {\r\n\t\tthis.cnt = cnt;\r\n\t}\r\n\tpublic String getCategory() {\r\n\t\treturn category;\r\n\t}\r\n\r\n\tpublic void setCategory(String category) {\r\n\t\tthis.category = category;\r\n\t}\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/board/BoardVO.java b/src/main/java/com/example/board/BoardVO.java
+--- a/src/main/java/com/example/board/BoardVO.java	(revision 27fe1c02007f67b0f10741d305e3de063ddc2067)
++++ b/src/main/java/com/example/board/BoardVO.java	(date 1671005146722)
+@@ -1,58 +1,90 @@
+-package board;
++package com.example.board;
+ 
+ import java.util.Date;
+ 
+ public class BoardVO {
+ 	private int seq;
++	private String semester;
+ 	private String category;
+-	private String title;
+-	private String writer;
+-	private String content;
++	private String classs;
++	private String professor;
++	private String classCapacity;
++	private String email;
+ 	private Date regdate;
+-	private int cnt;
+-
+ 
+ 	public int getSeq() {
+ 		return seq;
+ 	}
++
+ 	public void setSeq(int seq) {
+ 		this.seq = seq;
+ 	}
+-	public String getTitle() {
+-		return title;
++
++	public String getSemester() {
++		return semester;
++	}
++
++	public void setSemester(String semester) {
++		this.semester = semester;
++	}
++
++	public String getCategory() {
++		return category;
++	}
++
++	public void setCategory(String category) {
++		this.category = category;
++	}
++
++	public String getClasss() {
++		return classs;
+ 	}
+-	public void setTitle(String title) {
+-		this.title = title;
++
++	public void setClasss(String classs) {
++		this.classs = classs;
+ 	}
+-	public String getWriter() {
+-		return writer;
++
++	public String getProfessor() {
++		return professor;
+ 	}
+-	public void setWriter(String writer) {
+-		this.writer = writer;
++
++	public void setProfessor(String professor) {
++		this.professor = professor;
+ 	}
+-	public String getContent() {
+-		return content;
++
++	public String getClassCapacity() {
++		return classCapacity;
+ 	}
+-	public void setContent(String content) {
+-		this.content = content;
++
++	public void setClassCapacity(String classCapacity) {
++		this.classCapacity = classCapacity;
+ 	}
++
++	public String getEmail() {
++		return email;
++	}
++
++	public void setEmail(String email) {
++		this.email = email;
++	}
++
+ 	public Date getRegdate() {
+ 		return regdate;
+ 	}
++
+ 	public void setRegdate(Date regdate) {
+ 		this.regdate = regdate;
+ 	}
++
+ 	public int getCnt() {
+ 		return cnt;
+ 	}
++
+ 	public void setCnt(int cnt) {
+ 		this.cnt = cnt;
+ 	}
+-	public String getCategory() {
+-		return category;
+-	}
++
++	private int cnt;
+ 
+-	public void setCategory(String category) {
+-		this.category = category;
+-	}
++
+ }
+Index: src/main/java/com/example/board/BoardDAO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package board;\r\n\r\nimport org.apache.ibatis.session.SqlSession;\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.stereotype.Repository;\r\n\r\nimport java.util.List;\r\n\r\n@Repository\r\npublic class BoardDAO {\r\n    @Autowired\r\n    SqlSession sqlSession;\r\n\r\n    public int insertBoard(BoardVO vo){\r\n        int result = sqlSession.insert(\"Board.insertBoard\",vo);\r\n        return result;\r\n    }\r\n    public BoardVO getBoard(int seq){\r\n        BoardVO one = sqlSession.selectOne(\"Board.getBoard\",seq);\r\n        return one;\r\n    }\r\n    public List<BoardVO> getBoardList(){\r\n        List<BoardVO> list = sqlSession.selectList(\"Board.getBoardList\");\r\n        return list;\r\n    }\r\n    public int deleteBoard(int seq) {\r\n        int result =sqlSession.delete(\"Board.deleteBoard\",seq);\r\n        return result;\r\n    }\r\n\r\n    public int updateBoard(BoardVO vo) {\r\n        int result =sqlSession.update(\"Board.updateBoard\",vo);\r\n        return result;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/board/BoardDAO.java b/src/main/java/com/example/board/BoardDAO.java
+--- a/src/main/java/com/example/board/BoardDAO.java	(revision 27fe1c02007f67b0f10741d305e3de063ddc2067)
++++ b/src/main/java/com/example/board/BoardDAO.java	(date 1671005146732)
+@@ -1,4 +1,4 @@
+-package board;
++package com.example.board;
+ 
+ import org.apache.ibatis.session.SqlSession;
+ import org.springframework.beans.factory.annotation.Autowired;
+Index: src/main/java/com/example/board/HomeController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package board;\r\n\r\nimport org.springframework.stereotype.Controller;\r\nimport org.springframework.web.bind.annotation.RequestMapping;\r\n\r\n@Controller\r\npublic class HomeController {\r\n    @RequestMapping(\"/\")\r\n    public String home() {\r\n        return \"home\";\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/board/HomeController.java b/src/main/java/com/example/board/HomeController.java
+--- a/src/main/java/com/example/board/HomeController.java	(revision 27fe1c02007f67b0f10741d305e3de063ddc2067)
++++ b/src/main/java/com/example/board/HomeController.java	(date 1671005146742)
+@@ -1,4 +1,4 @@
+-package board;
++package com.example.board;
+ 
+ import org.springframework.stereotype.Controller;
+ import org.springframework.web.bind.annotation.RequestMapping;
+Index: src/main/java/com/example/board/BoardController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package board;\r\n\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.stereotype.Controller;\r\nimport org.springframework.ui.Model;\r\nimport org.springframework.web.bind.annotation.PathVariable;\r\nimport org.springframework.web.bind.annotation.RequestMapping;\r\nimport org.springframework.web.bind.annotation.RequestMethod;\r\n\r\n@Controller\r\n@RequestMapping(value = \"/board\")\r\npublic class BoardController {\r\n    @Autowired\r\n    BoardService boardService;\r\n\r\n    @RequestMapping(value = \"/list\", method = RequestMethod.GET)\r\n    public String boardlist(Model model){\r\n        model.addAttribute(\"list\",boardService.getBoardList());\r\n        return \"list\";\r\n    }\r\n\r\n    @RequestMapping(value = \"/add\", method = RequestMethod.GET)\r\n    public String addPost(){\r\n        return \"addpostform\";\r\n    }\r\n\r\n    @RequestMapping(value = \"/addok\", method = RequestMethod.POST)\r\n    public String addPostOk(BoardVO vo){\r\n        if(boardService.insertBoard(vo)==0){\r\n            System.out.println(\"데이터 추가 실패\");\r\n        }else{\r\n            System.out.println(\"데이터 추가 성공!!\");\r\n        }\r\n        return \"redirect:list\";\r\n    }\r\n    @RequestMapping(value = \"/editform/{id}\", method = RequestMethod.GET)\r\n    public String editPost(@PathVariable(\"id\") int id, Model model){\r\n        BoardVO boardVO = boardService.getBoard(id);\r\n        model.addAttribute(\"boardVO\",boardVO);\r\n        return \"editform\";\r\n    }\r\n\r\n    @RequestMapping(value = \"/editok\", method = RequestMethod.POST)\r\n    public String editPostOK(BoardVO vo){\r\n        int i = boardService.updateBoard(vo);\r\n        if(i==0){\r\n            System.out.println(\"데이터 수정 실패\");\r\n        }else{\r\n            System.out.println(\"데이터 수정 성공!!!\");\r\n        }\r\n        return \"redirect:list\";\r\n    }\r\n    @RequestMapping(value = \"/deleteok/{id}\", method = RequestMethod.GET)\r\n    public String deletePostOk(@PathVariable(\"id\") int id){\r\n        if(boardService.deleteBoard(id)==0){\r\n            System.out.println(\"데이터 삭제 실패\");\r\n        }else{\r\n            System.out.println(\"데이터 삭제 성공!!!\");\r\n        }\r\n        return \"redirect:../list\";\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/board/BoardController.java b/src/main/java/com/example/board/BoardController.java
+--- a/src/main/java/com/example/board/BoardController.java	(revision 27fe1c02007f67b0f10741d305e3de063ddc2067)
++++ b/src/main/java/com/example/board/BoardController.java	(date 1671005146753)
+@@ -1,4 +1,4 @@
+-package board;
++package com.example.board;
+ 
+ import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.stereotype.Controller;
+Index: src/main/resources/mappers/board-mapper.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<!DOCTYPE mapper PUBLIC \"-//mybatis.org//DTD Mapper 3.0//EN\" \"https://mybatis.org/dtd/mybatis-3-mapper.dtd\">\r\n<mapper namespace=\"BoardDAO\">\r\n    <insert id=\"insertBoard\">\r\n        insert into NEWBOARD (category, title, writer, content)\r\n        values (#{category}, #{title}, #{writer}, #{content})\r\n    </insert>\r\n    <update id=\"updateBoard\">\r\n        update NEWBOARD\r\n        set category=#{category},title=#{title},content=#{content} where seq=#{seq}\r\n    </update>\r\n    <delete id=\"deleteBoard\">\r\n        delete from NEWBOARD where seq=#{seq}\r\n    </delete>\r\n    <select id=\"getBoard\" resultType=\"board\">\r\n        select * from NEWBOARD where seq=#{seq}\r\n    </select>\r\n    <select id=\"getBoardList\" resultType=\"board\">\r\n        select * from NEWBOARD order by seq desc\r\n    </select>\r\n</mapper>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/mappers/board-mapper.xml b/src/main/resources/mappers/board-mapper.xml
+--- a/src/main/resources/mappers/board-mapper.xml	(revision 27fe1c02007f67b0f10741d305e3de063ddc2067)
++++ b/src/main/resources/mappers/board-mapper.xml	(date 1671005146762)
+@@ -1,21 +1,21 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+-<mapper namespace="BoardDAO">
++<mapper namespace="Board">
+     <insert id="insertBoard">
+-        insert into NEWBOARD (category, title, writer, content)
+-        values (#{category}, #{title}, #{writer}, #{content})
++        insert into REVIEW (semester, category, classs, professor, classCapacity,email)
++        values (#{semester}, #{category}, #{classs}, #{professor}, #{classCapacity}, #{email})
+     </insert>
+     <update id="updateBoard">
+-        update NEWBOARD
+-        set category=#{category},title=#{title},content=#{content} where seq=#{seq}
++        update REVIEW
++        set semester = #{semester}, category = #{category}, classs = #{classs}, professor = #{professor}, classCapacity = #{classCapacity}, email = #{email} where seq=#{seq}
+     </update>
+     <delete id="deleteBoard">
+-        delete from NEWBOARD where seq=#{seq}
++        delete from REVIEW where seq=#{seq}
+     </delete>
+     <select id="getBoard" resultType="board">
+-        select * from NEWBOARD where seq=#{seq}
++        select * from REVIEW where seq=#{seq}
+     </select>
+     <select id="getBoardList" resultType="board">
+-        select * from NEWBOARD order by seq desc
++        select * from REVIEW order by seq desc
+     </select>
+ </mapper>
+\ No newline at end of file
+Index: pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n  xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd\">\r\n  <modelVersion>4.0.0</modelVersion>\r\n  <groupId>org.example</groupId>\r\n  <artifactId>plzLogin</artifactId>\r\n  <packaging>war</packaging>\r\n  <version>1.0-SNAPSHOT</version>\r\n  <name>plzLogin Maven Webapp</name>\r\n  <url>http://maven.apache.org</url>\r\n  <dependencies>\r\n    <dependency>\r\n      <groupId>junit</groupId>\r\n      <artifactId>junit</artifactId>\r\n      <version>3.8.1</version>\r\n      <scope>test</scope>\r\n    </dependency>\r\n  </dependencies>\r\n  <build>\r\n    <finalName>plzLogin</finalName>\r\n  </build>\r\n</project>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pom.xml b/pom.xml
+--- a/pom.xml	(revision 27fe1c02007f67b0f10741d305e3de063ddc2067)
++++ b/pom.xml	(date 1671005146773)
+@@ -14,8 +14,53 @@
+       <version>3.8.1</version>
+       <scope>test</scope>
+     </dependency>
++    <dependency>
++      <groupId>org.springframework</groupId>
++      <artifactId>spring-webmvc</artifactId>
++      <version>5.3.23</version>
++    </dependency>
++    <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
++    <dependency>
++      <groupId>mysql</groupId>
++      <artifactId>mysql-connector-java</artifactId>
++      <version>8.0.20</version>
++    </dependency>
++    <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
++    <dependency>
++      <groupId>org.springframework</groupId>
++      <artifactId>spring-jdbc</artifactId>
++      <version>5.3.23</version>
++    </dependency>
++    <dependency>
++      <groupId>jstl</groupId>
++      <artifactId>jstl</artifactId>
++      <version>1.2</version>
++    </dependency>
++    <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
++    <dependency>
++      <groupId>org.mybatis</groupId>
++      <artifactId>mybatis-spring</artifactId>
++      <version>2.0.6</version>
++    </dependency>
++    <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
++    <dependency>
++      <groupId>org.mybatis</groupId>
++      <artifactId>mybatis</artifactId>
++      <version>3.5.6</version>
++    </dependency>
+   </dependencies>
+   <build>
+     <finalName>plzLogin</finalName>
++    <pluginManagement>
++      <plugins>
++        <plugin>
++          <artifactId>maven-compiler-plugin</artifactId>
++          <configuration>
++            <source>1.8</source>
++            <target>1.8</target>
++          </configuration>
++        </plugin>
++      </plugins>
++    </pluginManagement>
+   </build>
+ </project>
+Index: src/main/webapp/WEB-INF/dispatcher-servlet.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<beans xmlns=\"http://www.springframework.org/schema/beans\"\r\n       xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n       xsi:schemaLocation=\"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd\">\r\n\r\n</beans>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/webapp/WEB-INF/dispatcher-servlet.xml b/src/main/webapp/WEB-INF/dispatcher-servlet.xml
+--- a/src/main/webapp/WEB-INF/dispatcher-servlet.xml	(revision 27fe1c02007f67b0f10741d305e3de063ddc2067)
++++ b/src/main/webapp/WEB-INF/dispatcher-servlet.xml	(date 1671005146784)
+@@ -1,6 +1,28 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <beans xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
++       xmlns:mvc="http://www.springframework.org/schema/mvc"
++       xmlns:context="http://www.springframework.org/schema/context"
++       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
++    <mvc:annotation-driven />
++    <context:component-scan base-package="com.example" />
++    <mvc:resources mapping = "/resources/**" location="/resources/"/>
++    <mvc:resources mapping = "/img/**" location="/resources/img"/>
++    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
++        <property name="prefix" value="/WEB-INF/views/" />
++        <property name="suffix" value=".jsp" />
++    </bean>
++
+ 
++
++    <bean id="loginCheckInterceptor" class="com.example.util.LoginCheckInterceptor"/>
++    <mvc:interceptors>
++        <mvc:interceptor>
++            <mvc:mapping path="/**"/>
++            <mvc:exclude-mapping path="/resources/**"/>
++            <mvc:exclude-mapping path="/img/**"/>
++            <mvc:exclude-mapping path="/login/**"/>
++            <ref bean="loginCheckInterceptor" />
++        </mvc:interceptor>
++    </mvc:interceptors>
+ </beans>
+\ No newline at end of file
+Index: src/main/java/com/example/board/BoardService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package board;\r\n\r\nimport java.util.List;\r\n\r\npublic interface BoardService {\r\n    public int insertBoard(BoardVO vo);\r\n    public int deleteBoard(int seq);\r\n    public int updateBoard(BoardVO vo);\r\n    public BoardVO getBoard(int seq);\r\n    public List<BoardVO> getBoardList();\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/board/BoardService.java b/src/main/java/com/example/board/BoardService.java
+--- a/src/main/java/com/example/board/BoardService.java	(revision 27fe1c02007f67b0f10741d305e3de063ddc2067)
++++ b/src/main/java/com/example/board/BoardService.java	(date 1671005146794)
+@@ -1,4 +1,4 @@
+-package board;
++package com.example.board;
+ 
+ import java.util.List;
+ 
+Index: src/main/java/com/example/board/BoardServicelmpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package board;\r\n\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.stereotype.Service;\r\n\r\nimport java.util.List;\r\n\r\n@Service\r\npublic class BoardServicelmpl implements BoardService{\r\n\r\n    @Autowired\r\n    BoardDAO boardDAO;\r\n\r\n    @Override\r\n    public int insertBoard(BoardVO vo){\r\n        return boardDAO.insertBoard(vo);\r\n    }\r\n    @Override\r\n    public int deleteBoard(int seq){\r\n        return boardDAO.deleteBoard(seq);\r\n    }\r\n    @Override\r\n    public int updateBoard(BoardVO vo){\r\n        return boardDAO.updateBoard(vo);\r\n    }\r\n    @Override\r\n    public BoardVO getBoard(int seq){\r\n        return boardDAO.getBoard(seq);\r\n    }\r\n    @Override\r\n    public List<BoardVO> getBoardList(){\r\n        return boardDAO.getBoardList();\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/board/BoardServicelmpl.java b/src/main/java/com/example/board/BoardServicelmpl.java
+--- a/src/main/java/com/example/board/BoardServicelmpl.java	(revision 27fe1c02007f67b0f10741d305e3de063ddc2067)
++++ b/src/main/java/com/example/board/BoardServicelmpl.java	(date 1671005146805)
+@@ -1,4 +1,4 @@
+-package board;
++package com.example.board;
+ 
+ import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.stereotype.Service;
+Index: src/main/webapp/WEB-INF/web.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE web-app PUBLIC\r\n \"-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN\"\r\n \"http://java.sun.com/dtd/web-app_2_3.dtd\" >\r\n\r\n<web-app>\r\n  <display-name>Archetype Created Web Application</display-name>\r\n</web-app>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/webapp/WEB-INF/web.xml b/src/main/webapp/WEB-INF/web.xml
+--- a/src/main/webapp/WEB-INF/web.xml	(revision 27fe1c02007f67b0f10741d305e3de063ddc2067)
++++ b/src/main/webapp/WEB-INF/web.xml	(date 1671005146816)
+@@ -4,4 +4,32 @@
+ 
+ <web-app>
+   <display-name>Archetype Created Web Application</display-name>
++    <context-param>
++        <param-name>contextConfigLocation</param-name>
++        <param-value>/WEB-INF/applicationContext.xml</param-value>
++    </context-param>
++    <filter>
++        <filter-name>encodingFilter</filter-name>
++        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
++        <init-param>
++            <param-name>encoding</param-name>
++            <param-value>UTF-8</param-value>
++        </init-param>
++    </filter>
++    <filter-mapping>
++        <filter-name>encodingFilter</filter-name>
++        <url-pattern>/*</url-pattern>
++    </filter-mapping>
++    <listener>
++        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
++    </listener>
++    <servlet>
++        <servlet-name>dispatcher</servlet-name>
++        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
++        <load-on-startup>1</load-on-startup>
++    </servlet>
++    <servlet-mapping>
++        <servlet-name>dispatcher</servlet-name>
++        <url-pattern>/</url-pattern>
++    </servlet-mapping>
+ </web-app>
+Index: src/main/resources/mybatis-config.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<!DOCTYPE configuration PUBLIC \"-//mybatis.org//DTD Config 3.0//EN\" \"http://mybatis.org/dtd/mybatis-3-config.dtd\">\r\n<configuration>\r\n    <!-- Properties 파일 설정 -->\r\n<!--    <properties resource=\"db.properties\"></properties>-->\r\n    <!-- Alias 설정 -->\r\n    <typeAliases>\r\n        <typeAlias alias=\"board\" type=\"com.mycom.myapp.board.BoardVO\"/>\r\n    </typeAliases>\r\n    <!--DataSource설정-->\r\n    <environments default=\"development\">\r\n        <environment id=\"development\">\r\n            <transactionManager type=\"JDBC\"/>\r\n            <dataSource type=\"POOLED\">\r\n                <property name=\"driver\" value=\"${jdbc.driverClassName}\"/>\r\n                <property name=\"url\" value=\"${jdbc.url}\"/>\r\n                <property name=\"username\" value=\"${jdbc.username}\"/>\r\n                <property name=\"password\" value=\"${jdbc.password}\"/>\r\n            </dataSource>\r\n        </environment>\r\n    </environments>\r\n    <!-- Sql Mapper 설정-->\r\n<!--    <mappers>-->\r\n<!--        <mapper resource=\"mappers/board-mapper.xml\"/>-->\r\n<!--    </mappers>-->\r\n</configuration>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/mybatis-config.xml b/src/main/resources/mybatis-config.xml
+--- a/src/main/resources/mybatis-config.xml	(revision 27fe1c02007f67b0f10741d305e3de063ddc2067)
++++ b/src/main/resources/mybatis-config.xml	(date 1671005146827)
+@@ -1,26 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+ <configuration>
+-    <!-- Properties 파일 설정 -->
+-<!--    <properties resource="db.properties"></properties>-->
+-    <!-- Alias 설정 -->
+     <typeAliases>
+-        <typeAlias alias="board" type="com.mycom.myapp.board.BoardVO"/>
++        <typeAlias alias="board" type="com.example.board.BoardVO"/>
+     </typeAliases>
+-    <!--DataSource설정-->
+-    <environments default="development">
+-        <environment id="development">
+-            <transactionManager type="JDBC"/>
+-            <dataSource type="POOLED">
+-                <property name="driver" value="${jdbc.driverClassName}"/>
+-                <property name="url" value="${jdbc.url}"/>
+-                <property name="username" value="${jdbc.username}"/>
+-                <property name="password" value="${jdbc.password}"/>
+-            </dataSource>
+-        </environment>
+-    </environments>
+-    <!-- Sql Mapper 설정-->
+-<!--    <mappers>-->
+-<!--        <mapper resource="mappers/board-mapper.xml"/>-->
+-<!--    </mappers>-->
+ </configuration>
+\ No newline at end of file
+Index: src/main/webapp/WEB-INF/applicationContext.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<beans xmlns=\"http://www.springframework.org/schema/beans\"\r\n       xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n       xsi:schemaLocation=\"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd\">\r\n\r\n</beans>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/webapp/WEB-INF/applicationContext.xml b/src/main/webapp/WEB-INF/applicationContext.xml
+--- a/src/main/webapp/WEB-INF/applicationContext.xml	(revision 27fe1c02007f67b0f10741d305e3de063ddc2067)
++++ b/src/main/webapp/WEB-INF/applicationContext.xml	(date 1671005146836)
+@@ -2,5 +2,22 @@
+ <beans xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+-
++    <!--Root Context: defines shared resources visible to all other web components-->
++    <bean id = "dataSource" class ="org.springframework.jdbc.datasource.DriverManagerDataSource">
++        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
++        <property name="url" value="jdbc:mysql://walab.handong.edu:3306/p2_21900099?useSSL=false"/>
++        <property name="username" value="p2_21900099"/>
++        <property name="password" value="oquooQu4zu"/>
++    </bean>
++    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
++        <property name="dataSource" ref="dataSource"/>
++    </bean>
++    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
++        <property name="dataSource" ref="dataSource"></property>
++        <property name="configLocation" value="classpath:mybatis-config.xml"></property>
++        <property name="mapperLocations" value="classpath:mappers/*-mapper.xml"></property>
++    </bean>
++    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
++        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
++    </bean>
+ </beans>
+\ No newline at end of file
+Index: src/main/java/com/example/user/UserDAO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package user;\r\n\r\nimport org.mybatis.spring.SqlSessionTemplate;\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\n\r\npublic class UserDAO {\r\n    @Autowired\r\n    SqlSessionTemplate sqlSession;\r\n    public UserVO getUser(UserVO vo){\r\n        return sqlSession.selectOne(\"User.getUser\",vo);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/user/UserDAO.java b/src/main/java/com/example/user/UserDAO.java
+--- a/src/main/java/com/example/user/UserDAO.java	(revision 27fe1c02007f67b0f10741d305e3de063ddc2067)
++++ b/src/main/java/com/example/user/UserDAO.java	(date 1671005146848)
+@@ -1,8 +1,10 @@
+-package user;
++package com.example.user;
+ 
+ import org.mybatis.spring.SqlSessionTemplate;
+ import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.stereotype.Repository;
+ 
++@Repository
+ public class UserDAO {
+     @Autowired
+     SqlSessionTemplate sqlSession;
